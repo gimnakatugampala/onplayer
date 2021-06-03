@@ -18,6 +18,8 @@ const playbackAnimation = document.getElementById('playback-animation');
 const fullscreenButton = document.getElementById('fullscreen-button');
 const videoContainer = document.getElementById('video-container');
 const fullscreenIcons = fullscreenButton.querySelectorAll('use');
+const chatStop = document.getElementById('chat')
+const enter = document.getElementById('enter')
 
 // Socket io
 const socket = io();
@@ -252,3 +254,31 @@ function updateFullscreenButton() {
     fullscreenButton.setAttribute('data-title', 'Full screen (f)')
   }
 }
+
+// Chat Feature
+function setUsername() {
+  socket.emit('setUsername', document.getElementById('name').value);
+};
+var user;
+socket.on('userExists', function(data) {
+  document.getElementById('error-container').innerHTML = data;
+});
+socket.on('userSet', function(data) {
+  user = data.username;
+  chatStop.innerHTML = '<input type = "text" id = "message" class="form-control">\
+  <button type = "button" name = "button" onclick = "sendMessage()" class="btn btn-primary mt-2">Send</button>\
+  <div id = "message-container"></div>';
+  enter.style.display = 'none'
+});
+function sendMessage() {
+  var msg = document.getElementById('message').value;
+  if(msg) {
+     socket.emit('msg', {message: msg, user: user});
+  }
+}
+socket.on('newmsg', function(data) {
+  if(user) {
+     document.getElementById('message-container').innerHTML += '<div><b>' + 
+        data.user + '</b>: ' + data.message + '</div>'
+  }
+})

@@ -7,8 +7,18 @@ const app = express();
 const server = http.createServer(app)
 const io = socketio(server)
 
+
 // Load Static files
 app.use(express.static(path.join(__dirname,'public')))
+
+
+// Routes
+app.get('/', function(req, res) {
+    res.sendfile('index.html');
+ });
+
+//  Users array
+ users = [];
 
 // Run when client connects
 io.on('connection',(socket) =>{
@@ -29,6 +39,32 @@ io.on('connection',(socket) =>{
         console.log(msg)
         io.emit('currentTime',msg)
     })
+
+    // Chat Feature
+    socket.on('setUsername', function(data) {
+        if(users.indexOf(data) > -1) {
+           users.push(data);
+           socket.emit('userSet', {username: data});
+        } else {
+           socket.emit('userExists', data + ' is on the Chat');
+        }
+     })
+
+     socket.on('setUsername', function(data) {
+        console.log(data);
+        
+        if(users.indexOf(data) > -1) {
+           socket.emit('userExists', data + ' is on the Chat');
+        } else {
+           users.push(data);
+           socket.emit('userSet', {username: data});
+        }
+     });
+     
+     socket.on('msg', function(data) {
+        //Send message to everyone
+        io.sockets.emit('newmsg', data);
+     })
 })
 
 

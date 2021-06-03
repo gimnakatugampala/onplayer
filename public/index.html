@@ -122,8 +122,25 @@
         </defs>
       </svg>
 
+      <!-- Chat feature -->
+      <div class="chat-app">
+        <h4>Let's Chat</h4>
 
-        <!-- The Navbar -->
+      <div id = "error-container" class="bg-success text-white my-4 p-2"></div>
+      <div class="container my-5" id="enter">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="name" type="text" name="name" value="" placeholder="Enter your name!" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" name = "button" onclick = "setUsername()">Enter Name</button>
+          </div>
+        </div>
+
+      </div>
+      <div id="chat"></div>
+    </div>
+
+
+        <!-- The Footer -->
     <footer class="navbar navbar-dark bg-dark text-white p-3">
       <p>OnPlayer | &copy; All Rights Reserved</p><br>
       <p>Gimna Katugampala Production</p>

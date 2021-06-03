@@ -292,3 +292,18 @@
     stroke: #fff;
     cursor: pointer;
   }
+
+  .chat-app{
+    margin: 0 auto;
+    max-width: 1000px;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 50px;
+    border: 2px solid #535db9;
+    border-radius: 25px;
+  }
+
+  .chat-app input{
+    height: 100%;
+  }
+
