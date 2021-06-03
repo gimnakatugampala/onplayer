@@ -147,13 +147,20 @@ function updateSeekTooltip(event) {
 
   // the progress bar is clicked
 function skipAhead(event) {
+ 
     const skipTo = event.target.dataset.seek ? event.target.dataset.seek : event.target.value;
-    video.currentTime = skipTo;
-    progressBar.value = skipTo;
-    seek.value = skipTo;
+    
 
-    //
-    socket.emit('currentTime',video.currentTime) 
+    // syncing the progress bar
+    socket.emit('currentTime',skipTo) 
+
+    console.log(skipTo)
+
+    socket.on('currentTime',(msg) =>{
+      video.currentTime = msg;
+      progressBar.value = msg;
+      seek.value = msg;
+    })
   }
 
   // and disables the muted state if active
@@ -161,11 +168,12 @@ function updateVolume() {
     if (video.muted) {
       video.muted = false;
     }
-  
-    video.volume = volume.value;
-
+    socket.on('volume',(msg) =>{
+      video.volume = msg;
+    })
+    
     // Send the value of volume to the server
-    socket.emit('volume',video.volume)
+    socket.emit('volume',volume.value)
   }
 
 

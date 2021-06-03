@@ -21,20 +21,14 @@ io.on('connection',(socket) =>{
     // Volume Changes
     socket.on('volume',(msg) =>{
         console.log(msg)
+        io.emit('volume',msg)
     })
 
     // Skip the progress 
     socket.on('currentTime',(msg) =>{
         console.log(msg)
+        io.emit('currentTime',msg)
     })
-
-
-    // // Runs when client disconnets
-    // socket.on('disconnect',() =>{
-    //     io.emit('left','A User has left')
-    // })
-
-    
 })
 
 
