@@ -4,8 +4,7 @@
   "description": "Video Player with can Sync to all the Clients at Once",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "dev":"nodemon server"
+    "start": "node server"
   },
   "author": "Gimna Katugampala",
   "license": "MIT",
