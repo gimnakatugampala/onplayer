@@ -1,0 +1,16 @@
+{
+  "name": "onplayer",
+  "version": "1.0.0",
+  "description": "Video Player with can Sync to all the Clients at Once",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev":"nodemon server"
+  },
+  "author": "Gimna Katugampala",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.1.2"
+  }
+}
